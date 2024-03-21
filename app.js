@@ -5,13 +5,10 @@ const mongoose =require('mongoose')
 require('dotenv/config')
 
 const bodyParser = require('body-parser')
-const postsRoute = require('./routes/posts')
 
 const Post = require('./models/Post')
 
 app.use(bodyParser.json())
-app.use('/posts',postsRoute)
-
 
 // POST (Create data)
 app.post('/',async(req,res)=>{
