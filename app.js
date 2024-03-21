@@ -14,9 +14,7 @@ app.get('/', (req,res) =>{
     res.send('Homepage')
 })
 
-mongoose.connect(process.env.DB_CONNECTOR, ()=>{
-    console.log('DB is now connected!')
-})
+mongoose.connect(process.env.DB_CONNECTOR)
 
 app.listen(3000, ()=>{
     console.log('Server is up and running...')
