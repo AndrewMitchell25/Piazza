@@ -39,7 +39,7 @@ app.get('/', async(req,res) =>{
 // GET 2 (Read by ID)
 app.get('/:postId', async(req,res) =>{
     try{
-        const getPostById = await Post.findById(req.params.postId)
+        const getPostById = await Post.findById(req.params.postId);
         res.send(getPostById)
     }catch(err){
         res.send({message:err})
@@ -47,6 +47,14 @@ app.get('/:postId', async(req,res) =>{
 })
 
 //TODO: DELETE ALL
+app.delete('/delete', async (req,res) => {
+    try {
+        const deleteAll = await Post.deleteMany({});
+        res.send(deleteAll);
+    } catch (err) {
+        res.send({message:err})
+    }
+})
 
 // DELETE (Delete)
 app.delete('/:postId',async(req,res)=>{
