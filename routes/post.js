@@ -5,7 +5,7 @@ const Post = require('../models/Post')
 const verifyToken = require('../verifyToken')
 
 // POST (Create data)
-router.post('/',async(req,res)=>{
+router.post('/', verifyToken, async(req,res)=>{
     //console.log(req.body)
 
     const postData = new Post({
