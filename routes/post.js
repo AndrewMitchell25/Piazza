@@ -43,7 +43,7 @@ router.get('/:postId', verifyToken, async(req,res) =>{
 })
 
 //DELETE ALL
-router.delete('/', async (req,res) => {
+router.delete('/', verifyToken, async (req,res) => {
     try {
         const deleteAll = await Post.deleteMany({});
         res.send(deleteAll);
@@ -53,7 +53,7 @@ router.delete('/', async (req,res) => {
 })
 
 // DELETE (Delete)
-router.delete('/:postId',async(req,res)=>{
+router.delete('/:postId', verifyToken, async(req,res)=>{
     try{
         const deletePostById = await Post.deleteOne({_id:req.params.postId})
         res.send(deletePostById)
@@ -63,7 +63,7 @@ router.delete('/:postId',async(req,res)=>{
 })
 
 // PATCH (Update)
-router.patch('/:postId', async(req,res) =>{
+router.patch('/:postId', verifyToken, async(req,res) =>{
     try{
         const updatePostById = await Post.updateOne(
             {_id:req.params.postId},
