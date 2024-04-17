@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const Post = require('../models/Post')
+const verifyToken = require('../verifyToken')
 
 // POST (Create data)
 router.post('/',async(req,res)=>{
@@ -22,7 +23,7 @@ router.post('/',async(req,res)=>{
 })
 
 // GET 1 (Read all)
-router.get('/', async(req,res) =>{
+router.get('/', verifyToken, async(req,res) =>{
     try{
         const getPosts = await Post.find().limit(10)
         res.send(getPosts)
@@ -32,7 +33,7 @@ router.get('/', async(req,res) =>{
 })
 
 // GET 2 (Read by ID)
-router.get('/:postId', async(req,res) =>{
+router.get('/:postId', verifyToken, async(req,res) =>{
     try{
         const getPostById = await Post.findById(req.params.postId);
         res.send(getPostById)

@@ -8,7 +8,10 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
 const postRoute = require('./routes/post')
-app.use('/post',postRoute)
+app.use('/post', postRoute)
+
+const authRoute = require('./routes/auth')
+app.use('/user', authRoute)
 
 mongoose.connect(process.env.DB_CONNECTOR)
 
