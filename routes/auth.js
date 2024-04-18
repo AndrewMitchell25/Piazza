@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 
 const User = require('../models/User')
+const verifyToken = require('../verifyToken')
+
 const {registerValidation,loginValidation} = require('../validations/validation')
 
 const bcryptjs = require('bcryptjs')
@@ -64,6 +66,15 @@ router.post('/login', async(req,res)=>{
     const token = jsonwebtoken.sign({_id:user._id}, process.env.TOKEN_SECRET)
     res.header('auth-token',token).send({'auth-token':token})
 
+})
+
+router.delete('/', verifyToken, async (req,res) => {
+    try {
+        const deleteAll = await User.deleteMany({});
+        res.send(deleteAll);
+    } catch (err) {
+        res.send({message:err})
+    }
 })
 
 module.exports=router
